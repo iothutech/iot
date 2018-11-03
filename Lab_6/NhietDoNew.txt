@@ -4,8 +4,8 @@
 #include "DHT.h"
 
 // Thông tin Wifi
-const char* ssid ="kof-com";
-const char* password ="*#159489@";
+const char* ssid ="Airtel-E5573-2E5B";
+const char* password ="0n4q619r";
 const char* mqtt_server = "m15.cloudmqtt.com";
 const char* mqtt_user = "yrmtcgrh";
 const char* mqtt_pass = "Cnv2Bj8SigYi";
@@ -125,7 +125,7 @@ void setup() {
   }
 }
 
-char result[8];
+char hum[8];
 char temp[8];
 
 void loop() {
@@ -139,12 +139,11 @@ void loop() {
     lastMsg = now;
       float h = dht.readHumidity();
       float t = dht.readTemperature();
-      dtostrf(h, 6, 2, result);
+      dtostrf(h, 6, 2, hum);
       dtostrf(t, 6, 2, temp);
-      snprintf (msg, 75, "Nhiet do %s Do Am  %s ", temp, result);          
+      snprintf (msg, 75, "Nhiet do %s Do Am  %s ", temp, hum);          
       Serial.println(msg);
-      client.publish(outTopic, temp);
-      client.publish(outTopic, result);
+      client.publish("NhietDo", temp);
+      client.publish("DoAm", hum);
   }
 }
-//vòng lập chính của chương trình
